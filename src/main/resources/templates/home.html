@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Home</title>
+</head>
+<body>
+<h1>Websitee akyuu - 20230140090</h1>
+<h3>Selamat datang di aplikasi akuuw !!!</h3>
+
+<a th:href="@{/form}"><button>Input Data Mahasiswa</button></a>
+<br><br>
+
+<h3>Data Mahasiswa</h3>
+<table border="1">
+    <tr>
+        <th>No</th>
+        <th>Nama</th>
+        <th>NIM</th>
+        <th>Jenis Kelamin</th>
+    </tr>
+    <tr th:if="${#lists.isEmpty(mahasiswaList)}">
+        <td colspan="4" style="text-align: center;">Belum ada data</td>
+    </tr>
+    <tr th:each="mhs, stat : ${mahasiswaList}">
+        <td th:text="${stat.count}"></td>
+        <td th:text="${mhs.nama}"></td>
+        <td th:text="${mhs.nim}"></td>
+        <td th:text="${mhs.jenisKelamin}"></td>
+    </tr>
+</table>
+<br>
+<a th:href="@{/login}">Logout</a>
+</body>
+</html>
