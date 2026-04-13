@@ -2,33 +2,113 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>Home</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(to right, #8360c3, #2ebf91);
+            margin: 0;
+            padding: 20px;
+        }
+
+        .container {
+            background: white;
+            padding: 25px;
+            border-radius: 12px;
+            max-width: 800px;
+            margin: auto;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+
+        h1 {
+            margin-bottom: 5px;
+        }
+
+        h3 {
+            color: gray;
+        }
+
+        button {
+            padding: 10px 15px;
+            background: #8360c3;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background: #6a4bbf;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        table, th, td {
+            border: 1px solid #ddd;
+        }
+
+        th {
+            background: #8360c3;
+            color: white;
+            padding: 10px;
+        }
+
+        td {
+            padding: 8px;
+            text-align: center;
+        }
+
+        .empty {
+            color: gray;
+        }
+
+        .logout {
+            display: inline-block;
+            margin-top: 15px;
+            color: red;
+            text-decoration: none;
+        }
+    </style>
 </head>
+
 <body>
-<h1>Websitee akyuu - 20230140090</h1>
-<h3>Selamat datang di aplikasi akuuw !!!</h3>
 
-<a th:href="@{/form}"><button>Input Data Mahasiswa</button></a>
-<br><br>
+<div class="container">
+    <h1>Website Akyuu 💜</h1>
+    <h3>Maura Anindita Kirana - 20230140090</h3>
 
-<h3>Data Mahasiswa</h3>
-<table border="1">
-    <tr>
-        <th>No</th>
-        <th>Nama</th>
-        <th>NIM</th>
-        <th>Jenis Kelamin</th>
-    </tr>
-    <tr th:if="${#lists.isEmpty(mahasiswaList)}">
-        <td colspan="4" style="text-align: center;">Belum ada data</td>
-    </tr>
-    <tr th:each="mhs, stat : ${mahasiswaList}">
-        <td th:text="${stat.count}"></td>
-        <td th:text="${mhs.nama}"></td>
-        <td th:text="${mhs.nim}"></td>
-        <td th:text="${mhs.jenisKelamin}"></td>
-    </tr>
-</table>
-<br>
-<a th:href="@{/login}">Logout</a>
+    <a th:href="@{/form}">
+        <button>+ Input Data Mahasiswa</button>
+    </a>
+
+    <h3>Data Mahasiswa</h3>
+
+    <table>
+        <tr>
+            <th>No</th>
+            <th>Nama</th>
+            <th>NIM</th>
+            <th>Jenis Kelamin</th>
+        </tr>
+
+        <tr th:if="${#lists.isEmpty(mahasiswaList)}">
+            <td colspan="4" class="empty">Belum ada data</td>
+        </tr>
+
+        <tr th:each="mhs, stat : ${mahasiswaList}">
+            <td th:text="${stat.count}"></td>
+            <td th:text="${mhs.nama}"></td>
+            <td th:text="${mhs.nim}"></td>
+            <td th:text="${mhs.jenisKelamin}"></td>
+        </tr>
+    </table>
+
+    <a th:href="@{/login}" class="logout">Logout</a>
+</div>
+
 </body>
 </html>

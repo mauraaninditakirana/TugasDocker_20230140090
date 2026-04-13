@@ -14,6 +14,11 @@ public class UserController {
     // Menyimpan data sementara di list
     private List<User> dataMahasiswa = new ArrayList<>();
 
+    @GetMapping("/")
+    public String root() {
+        return "redirect:/login";
+    }
+
     @GetMapping("/login")
     public String showLoginPage() {
         return "login";
@@ -21,7 +26,7 @@ public class UserController {
 
     @PostMapping("/login")
     public String processLogin(@RequestParam String username, @RequestParam String password, Model model) {
-        if ("admin".equals(username) && "20230140090".equals(password)) {
+        if ("maura".equals(username) && "20230140090".equals(password)) {
             return "redirect:/home";
         }
         model.addAttribute("error", "Username atau Password salah!");
