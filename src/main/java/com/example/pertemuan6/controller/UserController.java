@@ -1,18 +1,17 @@
 package com.example.pertemuan6.controller;
 
 import com.example.pertemuan6.model.User;
+import com.example.pertemuan6.repository.UserRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
-import java.util.List;
-
 @Controller
 public class UserController {
 
-    // Menyimpan data sementara di list
-    private List<User> dataMahasiswa = new ArrayList<>();
+    @Autowired
+    private UserRepository userRepository;
 
     @GetMapping("/")
     public String root() {
@@ -26,7 +25,7 @@ public class UserController {
 
     @PostMapping("/login")
     public String processLogin(@RequestParam String username, @RequestParam String password, Model model) {
-        if ("maura".equals(username) && "20230140090".equals(password)) {
+        if ("admin".equals(username) && "20230140090".equals(password)) {
             return "redirect:/home";
         }
         model.addAttribute("error", "Username atau Password salah!");
@@ -35,7 +34,8 @@ public class UserController {
 
     @GetMapping("/home")
     public String showHomePage(Model model) {
-        model.addAttribute("mahasiswaList", dataMahasiswa);
+        // Ambil data dari database, bukan dari List
+        model.addAttribute("mahasiswaList", userRepository.findAll());
         return "home";
     }
 
@@ -47,7 +47,8 @@ public class UserController {
 
     @PostMapping("/form")
     public String processForm(@ModelAttribute User user) {
-        dataMahasiswa.add(user);
+        // Simpan ke database, bukan ke List
+        userRepository.save(user);
         return "redirect:/home";
     }
 }

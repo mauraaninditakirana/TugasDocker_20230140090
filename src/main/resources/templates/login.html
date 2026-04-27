@@ -6,7 +6,7 @@
     <style>
         body {
             font-family: Arial, sans-serif;
-            background: linear-gradient(to right, #8360c3, #2ebf91);
+            background: white;
             height: 100vh;
             display: flex;
             justify-content: center;
@@ -16,18 +16,48 @@
 
         .login-box {
             background: white;
-            padding: 30px;
+            padding: 35px;
             border-radius: 12px;
-            width: 320px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            width: 380px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.15);
             text-align: center;
+            border: 1px solid #ddd;
+        }
+
+        .header-box {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+
+        .profile-img {
+            width: 75px;
+            height: 75px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-right: 15px;
+            border: 2px solid #ff4da6;
+        }
+
+        .header-text h3 {
+            margin: 0;
+            font-size: 20px;
+            color: #333;
+        }
+
+        .header-text p {
+            margin: 5px 0 0;
+            font-size: 14px;
+            color: gray;
         }
 
         h2 {
             margin-bottom: 10px;
+            color: #222;
         }
 
-        p {
+        .desc {
             color: gray;
             font-size: 14px;
             margin-bottom: 20px;
@@ -35,24 +65,26 @@
 
         input {
             width: 100%;
-            padding: 10px;
+            padding: 12px;
             margin: 8px 0;
             border-radius: 6px;
             border: 1px solid #ccc;
+            box-sizing: border-box;
         }
 
         button {
             width: 100%;
-            padding: 10px;
-            background: #8360c3;
+            padding: 12px;
+            background: #ff4da6;
             color: white;
             border: none;
             border-radius: 6px;
             cursor: pointer;
+            font-size: 16px;
         }
 
         button:hover {
-            background: #6a4bbf;
+            background: #e60073;
         }
 
         .error {
@@ -66,8 +98,17 @@
 <body>
 
 <div class="login-box">
+
+    <div class="header-box">
+        <img src="/fotomaura.jpg" alt="Foto Profil" class="profile-img">
+        <div class="header-text">
+            <h3>Haii!!</h3>
+            <p>semoga harimu menyenangkan dan penuh semangat!</p>
+        </div>
+    </div>
+
     <h2>Login</h2>
-    <p>Maura Anindita Kirana - 20230140090</p>
+    <p class="desc">Silakan masuk ke akun Anda</p>
 
     <form th:action="@{/login}" method="post">
         <input type="text" name="username" placeholder="Username" required />
@@ -75,8 +116,8 @@
         <button type="submit">Login</button>
     </form>
 
-    <!-- error message -->
     <div class="error" th:if="${error}" th:text="${error}"></div>
+
 </div>
 
 </body>
